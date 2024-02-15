@@ -1,6 +1,9 @@
 package com.example.demo
 
 import org.springframework.web.bind.annotation.*
+import org.springframework.data.repository.CrudRepository
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Table
 
 @RestController
 class MessageController(var service: MessageService) {
@@ -16,4 +19,8 @@ class MessageController(var service: MessageService) {
     }
 }
 
-data class Message(val id: String?, val text: String)
+
+interface MessageRepository: CrudRepository<Message, String>
+
+@Table("MESSAGES")
+data class Message(@Id val id: String?, val text: String)
